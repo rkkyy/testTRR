@@ -8,6 +8,7 @@ os:
   - linux
 
 script:
+  #if there is no scripts in the build section, by default ant will be run
   - ./build_script.sh
   
 # after_success:
