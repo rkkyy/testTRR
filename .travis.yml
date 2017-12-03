@@ -1,8 +1,14 @@
-language:
-  - java
+# language:
+#   - java
+# jdk:
+#   - oraclejdk8
 
-jdk:
-  - oraclejdk8
+language: python
+
+addons:
+  apt:
+    packages:
+      - oracle-java8-set-default
 
 os:
   - linux
