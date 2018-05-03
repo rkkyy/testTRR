@@ -13,10 +13,14 @@ addons:
 os:
   - linux
 
+before_install:
+  - pip install requests
+
 script:
   #if there is no scripts in the build section, by default ant will be run
   - ./build_script.sh
-  
+  - ./_userCoverageActions.sh
+
 # after_success:
 #   - bash <(curl -s https://codecov.io/bash)
 
