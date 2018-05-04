@@ -14,7 +14,8 @@ os:
   - linux
 
 before_install:
-  - pip install requests
+  - pip install requests google-auth
+  - openssl aes-256-cbc -K $encrypted_0da0cc3f652c_key -iv $encrypted_0da0cc3f652c_iv -in test01-c0a07-firebase-adminsdk-rmnyw-82648f6c1e.json.enc -out test01-c0a07-firebase-adminsdk-rmnyw-82648f6c1e.json -d
 
 script:
   #if there is no scripts in the build section, by default ant will be run

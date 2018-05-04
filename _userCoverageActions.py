@@ -6,12 +6,39 @@ import sys
 import requests
 import json
 
+from google.oauth2 import service_account
+from google.auth.transport.requests import AuthorizedSession
+import google.auth.transport.requests
+
 ## TODOs
         # cope with network issues:
         #     - e.g. firebase unresponsive
 #### =======================================================
 
-gtoken = "ya29.c.EluwBdn0hRoaw5skrAvMfH-jdIEYm7OatIjxfudcsrFkkMu5Fq8QcXl0Pt7Q-9Kxd7I3vtkhQDcfC3d8CjKc1JCH-AD6doOTSNSv3o0f2nHaMHqNs6SAJIrhNPoD"
+# Define the required scopes
+scopes = [
+  "https://www.googleapis.com/auth/userinfo.email",
+  "https://www.googleapis.com/auth/firebase.database"
+]
+
+# Authenticate a credential with the service account
+credentials = service_account.Credentials.from_service_account_file("test01-c0a07-firebase-adminsdk-rmnyw-82648f6c1e.json", scopes=scopes)
+
+# Use the credentials object to authenticate a Requests session.
+authed_session = AuthorizedSession(credentials)
+# response = authed_session.get(
+#     "https://<DATABASE_NAME>.firebaseio.com/users/ada/name.json")
+
+# Or, use the token directly, as described in the "Authenticate with an
+# access token" section below. (not recommended)
+request = google.auth.transport.requests.Request()
+credentials.refresh(request)
+
+
+gtoken = credentials.token
+# print(access_token)
+#### =======================================================
+# gtoken = "ya29.c.EluwBdn0hRoaw5skrAvMfH-jdIEYm7OatIjxfudcsrFkkMu5Fq8QcXl0Pt7Q-9Kxd7I3vtkhQDcfC3d8CjKc1JCH-AD6doOTSNSv3o0f2nHaMHqNs6SAJIrhNPoD"
 bearerToken = "Bearer " + gtoken
 
 def getBranch():
